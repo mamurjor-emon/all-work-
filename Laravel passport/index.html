@@ -1,0 +1,66 @@
+<!-- Steps -->
+<!-- Create New Laravel Project  -->
+composer create-project laravel/larvel -laravel-passport
+<!-- Set Database Name  -->
+laravel_passport
+<!-- Required Passport  -->
+composer require laravel/passport --ignore-platform-req=ext-sodium
+<!-- Migation All Tables  -->
+php artisan migrate
+<!-- Insatall Passport  -->
+php artisan passport:install
+<!-- Go To User  Model  -->
+use Laravel\Passport\HasApiTokens;
+<!-- Go to AuthServiceProvider  -->
+use Laravel\Passport\Passport;
+<!-- Go To Config/auth.php  -->
+'api' => [
+'driver' => 'passport',
+'provider' => 'users',
+]
+ <!-- Create Controller  -->
+ php artisan make:controller Api/AuthController
+ <!-- Go To Controller  -->
+ public function register(Request $request){
+    $request->validate([
+        'name'     => 'required',
+        'email'    => 'required|unique:users,email',
+        'password' => 'required|min:6'
+    ]);
+    $user = User::create([
+        'name'     => $request->name,
+        'email'    => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+    if($user == true){
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'User Create Successfuly',
+        ]);
+    }else{
+        return response()->json([
+            'status'  => 'error',
+            'message' => 'Somethings Want To Worng',
+        ]);
+    }
+
+}
+
+public function login(Request $request)
+    {
+        $data = [
+            'email'    => $request->email,
+            'password' => $request->password,
+        ];
+        if (auth()->attempt($data)) {
+            return response()->json([
+                'status'  => 'success',
+                'message' => 'Login Successfuly',
+            ]);
+        } else {
+            return response()->json([
+                'status'  => 'error',
+                'message' => 'Login Error',
+            ]);
+        }
+    }

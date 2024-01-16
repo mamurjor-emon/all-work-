@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+
+.receipt{
+    color: #143F6B;
+    font-weight: 600;
+}
+.infodiv {
+	line-height: 14px;
+	font-weight: 600;
+	color: #626262;
+}
+.order-text{
+    color: #514a4a;
+    font-weight: 400;
+    padding-bottom: 16px !important;
+
+}
+.order-text-div{
+    color: #143F6B;
+    font-weight: 600;
+    line-height: 12px;
+}
+.invoice_title{
+    line-height: 5px;
+    margin-bottom: 30px;
+}
+.invoice_title h1{
+    color: #2A537D;
+}
+.invoice_title p{
+    color: #a8a8a8;
+}
+.invoice_subtitle{
+    display: flex;
+    margin-bottom: 50px;
+}
+.invoice_subtitle h3{
+    color: #2A537D;
+}
+.invoice_subtitle p {
+	background: rgb(1, 179, 1);
+	color: white;
+	padding: 0px 10px;
+	font-size: 17px;
+	font-weight: 600;
+	margin-left: 8px;
+	border-radius: 3px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row mt-5">
+           <div class="invoice_title">
+                <h1>One Click Table</h1>
+                <p>via oneclicktable.com</p>
+           </div>
+           <div class="invoice_subtitle">
+             <h3>Receipt</h3>
+             <p>PAID</p>
+           </div>
+           
+            <section>
+                <div class="recit d-flex justify-content-between">
+                   <div class="infodiv">
+                        <h5 class="receipt mb-4">Receipt To</h5>
+                        <p>User Name :</p>
+                        <p>Email :</p>
+                        <p>Phone :</p>
+                   </div>
+        
+                   <div class="text-end infodiv">
+                        <h5 class="receipt mb-4">Receipt Form</h5>
+                        <p>Astha Vobon Lift : 6</p>
+                        <p>MamurJor.com Ltd.</p>
+                        <p>Mirpur 10,Dhaka</p> 
+                        <p>Bangladesh</p>
+                        <p>Company Number: 01909-758929</p>
+                   </div>
+                </div>
+
+                <div class="order mt-5 d-flex justify-content-between">
+
+                    <div class="order-text-div">
+                        <h5 class="receipt mb-4">Your Order</h5>
+                        <p>Order Number / Receipt :</p>
+                        <p>#143F6B</p>
+                        <p>Billing Date : 32-32-20</p>
+                    </div>
+                    <div class="text-end mt-5 order-text-div">
+                        <p>Payment Method</p>
+                        <p>Currence</p>
+                    </div>
+                </div>
+                <div class="order_details mt-4">
+                    <table class="table">
+                        <thead class="table-light">
+                            <th></th>
+                            <th class="order-text">Billing Period</th>
+                            <th class="order-text">Quantity</th>
+                            <th class="order-text">Price</th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th>1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="vat mt-2 mb-5 d-flex justify-content-between">
+                    <div class="infodiv">
+                        <p>Vat(0%)</p>
+                        <h2 class="receipt">Your Order</h2>
+                    </div>
+                    <div class="text-end infodiv">
+                        <p>US$0.00</p>
+                        <h2 class="receipt">US$49.00</h2>
+                        </div>
+                </div>
+
+                <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat praesentium a dicta autem qui quia suscipit corrupt.</p>
+            </section>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+return '<div class="sub-heading d-flex align-items-center"><img class="country-flag" src="https://flagicons.lipis.dev/flags/4x3/'.$publisher->country_code.'.svg" alt=""> '.$publisher->phone_no.'</div>';

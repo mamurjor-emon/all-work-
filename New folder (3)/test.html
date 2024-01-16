@@ -1,0 +1,366 @@
+<div class="col-md-3">
+    <div class="table-edit-box">
+        <div class="table-option-box d-flex align-items-center justify-content-between">
+            <strong>Save Settings</strong>
+            <button class="btn btn-sm btn-primary px-3">Save</button>
+        </div>
+
+        {{-- theme settings --}}
+        <div class="table-option-box">
+            <div class="d-flex align-items-center justify-content-between">
+                <strong>Theme Option</strong>
+                <a class="collapsed text-dark fw-bold" data-bs-toggle="collapse" href="#collapse-11"
+                    aria-expanded="false" aria-controls="collapse-11"><i
+                        class="fas text-dark fa-chevron-down"></i></a>
+            </div>
+            <div id="collapse-11" class="collapse" role="tabpanel" aria-labelledby="heading-11"
+                data-bs-parent="#accordion-4" style="">
+                <div class="theme-option">
+                    <div class="theme-color">
+                        <ul>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-black"
+                                    id="theme-cg-black">
+                                <label class="cg-black" for="theme-cg-black"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-orange"
+                                    id="theme-cg-orange">
+                                <label class="cg-orange" for="theme-cg-orange"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-carrot"
+                                    id="theme-cg-carrot">
+                                <label class="cg-carrot" for="theme-cg-carrot"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-red" id="theme-cg-red">
+                                <label class="cg-red" for="theme-cg-red"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-gray" id="theme-cg-gray">
+                                <label class="cg-gray" for="theme-cg-gray"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-blue" id="theme-cg-blue">
+                                <label class="cg-blue" for="theme-cg-blue"></label>
+                            </li>
+                            <li>
+                                <input type="radio" checked="" name="theme_color" value="cg-green"
+                                    id="theme-cg-green">
+                                <label class="cg-green" for="theme-cg-green"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-bluebell"
+                                    id="theme-cg-bluebell">
+                                <label class="cg-bluebell" for="theme-cg-bluebell"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-bluedark"
+                                    id="theme-cg-bluedark">
+                                <label class="cg-bluedark" for="theme-cg-bluedark"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-berry"
+                                    id="theme-cg-berry">
+                                <label class="cg-berry" for="theme-cg-berry"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-keppel"
+                                    id="theme-cg-keppel">
+                                <label class="cg-keppel" for="theme-cg-keppel"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-dupain"
+                                    id="theme-cg-dupain">
+                                <label class="cg-dupain" for="theme-cg-dupain"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-darkorange"
+                                    id="theme-cg-darkorange">
+                                <label class="cg-darkorange" for="theme-cg-darkorange"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-darknavy"
+                                    id="theme-cg-darknavy">
+                                <label class="cg-darknavy" for="theme-cg-darknavy"></label>
+                            </li>
+                            <li>
+                                <input type="radio" name="theme_color" value="cg-eggplant"
+                                    id="theme-cg-eggplant">
+                                <label class="cg-eggplant" for="theme-cg-eggplant"></label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="theme-custom-color">
+                        <div class="mb-3">
+                            <label class="label-text">Custom Color</label>
+                            <div class="d-flex">
+                                <input type="color" size="7"
+                                    class="input-group-text theme-color-code">
+                                <input type="text" class="custom-color-code shadow-none outline-0">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check form-check-primary">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input">Apply Globally<i
+                                        class="input-helper"></i></label>
+                            </div>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-circle-question fa-sm text-primary"></i>
+                            <small>Click <b>Save</b> to apply</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- column headings --}}
+        <div class="table-option-box">
+            <div class="d-flex align-items-center justify-content-between">
+                <strong>Column Heading</strong>
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-heading"
+                    aria-expanded="false" aria-controls="collapse-heading"><i
+                        class="fas text-dark fa-chevron-down"></i></a>
+            </div>
+            <div id="collapse-heading" class="collapse" role="tabpanel" aria-labelledby="heading-11"
+                data-bs-parent="#accordion-4" style="">
+                <div class="heading-option mt-4">
+                    @foreach ($table->table_column as $column)
+                        @php
+                            $columnName = DB::table('table_columns')
+                                ->where('id', $column)
+                                ->first();
+                        @endphp
+                        <div class="row align-items-center">
+                            <div class="col-10">
+                                <x-form.textbox name="image_title[]" class="rounded-0 table-column-head"
+                                    data="{{ $columnName->type }}-head" value="{{ $columnName->name }}"
+                                    labelName="{{ $columnName->name }}" />
+                            </div>
+                            <div class="col-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="table_column_hide"
+                                        value="{{ $columnName->type }}" type="checkbox" id="image-title"
+                                        {{ $columnName->type ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="image-title"></label>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        {{-- buttons --}}
+        <div class="table-option-box">
+            <div class="d-flex align-items-center justify-content-between">
+                <strong>Buttons</strong>
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-buttons"
+                    aria-expanded="false" aria-controls="collapse-buttons"><i
+                        class="fas text-dark fa-chevron-down"></i></a>
+            </div>
+            <div id="collapse-buttons" class="collapse" role="tabpanel" aria-labelledby="buttons-11"
+                data-bs-parent="#accordion-4" style="">
+                <div class="button-option mt-4">
+                    <h6 class="mb-0 text-center text-primary">Button 1 Settings</h6>
+                    <div class="theme-custom-color">
+                        <div class="mb-3">
+                            <label class="label-text">Color</label>
+                            <div class="d-flex">
+                                <input type="color" size="7"
+                                    class="input-group-text btn1-color-code">
+                                <input type="text"
+                                    class="custom-btn1-color-code shadow-none outline-0">
+                            </div>
+                        </div>
+                        <div class="mb-3 btn1-rel">
+                            <label class="label-text">Rel</label>
+                            <select name="btn1_rel" class="form-control rounded-0">
+                                <option value="nofollow">nofollow</option>
+                                <option value="nofollow sponsored">nofollow sponsored</option>
+                                <option value="nofollow ugc">nofollow ugc</option>
+                                <option value="dofollow">dofollow</option>
+                                <option value="dofollow sponsored">dofollow sponsored</option>
+                                <option value="dofollow ugc">dofollow ugc</option>
+                                <option value="sponsored">sponsored</option>
+                                <option value="ugc">ugc</option>
+                                <option value="sponsored ugc">sponsored ugc</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <x-form.textbox name="button_1_text" class="rounded-0" labelName="Text" />
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" name="btn1_target" type="checkbox"
+                                    id="btn1-tab">
+                                <label class="form-check-label" for="btn1-tab">Open in new window</label>
+                            </div>
+                        </div>
+
+                        <h6 class="mb-0 text-center text-primary border-top py-4">Button 2 Settings</h6>
+                        <div class="mb-3">
+                            <label class="label-text">Color</label>
+                            <div class="d-flex">
+                                <input type="color" size="7"
+                                    class="input-group-text btn2-color-code">
+                                <input type="text"
+                                    class="custom-btn2-color-code shadow-none outline-0">
+                            </div>
+                        </div>
+                        <div class="mb-3 btn2-rel">
+                            <label class="label-text">Rel</label>
+                            <select name="btn2_rel" class="form-control rounded-0">
+                                <option value="nofollow">nofollow</option>
+                                <option value="nofollow sponsored">nofollow sponsored</option>
+                                <option value="nofollow ugc">nofollow ugc</option>
+                                <option value="dofollow">dofollow</option>
+                                <option value="dofollow sponsored">dofollow sponsored</option>
+                                <option value="dofollow ugc">dofollow ugc</option>
+                                <option value="sponsored">sponsored</option>
+                                <option value="ugc">ugc</option>
+                                <option value="sponsored ugc">sponsored ugc</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <x-form.textbox name="button_2_text" class="rounded-0" labelName="Text" />
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" name="btn2_target" type="checkbox"
+                                    id="btn2-tab">
+                                <label class="form-check-label" for="btn2-tab">Open in new window</label>
+                            </div>
+                        </div>
+                        <h6 class="mb-0 text-center text-primary border-top py-3">Common Settings</h6>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" name="button_arrow_icon" type="checkbox"
+                                    id="button-icon">
+                                <label class="form-check-label" for="button-icon">Add Arrow Icon</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="label-text">Button Style</label>
+                            <select name="button_style" class="form-control rounded-0">
+                                <option value="default">Default</option>
+                                <option value="cg-btn-1">Style 1</option>
+                                <option value="cg-btn-2">Style 2</option>
+                                <option value="cg-btn-3">Style 3</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="label-text">Button Size</label>
+                            <select name="button_size" class="form-control rounded-0">
+                                <option value="cg-btn-sm">Smail</option>
+                                <option value="cg-btn-md" selected>Medium</option>
+                                <option value="cg-btn-lg">Lerge</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- product setting --}}
+        <div class="table-option-box">
+            <div class="d-flex align-items-center justify-content-between">
+                <strong>Product Settings</strong>
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-product"
+                    aria-expanded="false" aria-controls="collapse-product"><i
+                        class="fas text-dark fa-chevron-down"></i></a>
+            </div>
+            <div id="collapse-product" class="collapse" role="tabpanel" aria-labelledby="product-11"
+                data-bs-parent="#accordion-4" style="">
+                <div class="product-option mt-4">
+                    <div class="mb-3">
+                        <x-form.selectbox name="product_title" class="rounded-0"
+                            labelName="Product Title">
+                            <option value="p">p</option>
+                            <option value="h1">h1</option>
+                            <option value="h2">h2</option>
+                            <option value="h3">h3</option>
+                            <option value="h4">h4</option>
+                            <option value="h5">h5</option>
+                            <option value="h6">h6</option>
+                        </x-form.selectbox>
+                    </div>
+                    <div class="mb-3">
+                        <x-form.selectbox name="remove_rating" class="rounded-0"
+                            labelName="Remove Rating">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </x-form.selectbox>
+                    </div>
+                    <div class="mb-3">
+                        <x-form.textbox name="score_title" labelName="Score Title" class="rounded-0"
+                            value="Our Score" />
+                    </div>
+                    <div class="mb-3">
+                        <x-form.selectbox name="link_title" class="rounded-0" labelName="Link Title">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </x-form.selectbox>
+                    </div>
+                    <div class="mb-3">
+                        <x-form.selectbox name="link_img" class="rounded-0" labelName="Link Image">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </x-form.selectbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- schema --}}
+        <div class="table-option-box">
+            <div class="d-flex align-items-center justify-content-between">
+                <strong>Schema</strong>
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-schema"
+                    aria-expanded="false" aria-controls="collapse-schema"><i
+                        class="fas text-dark fa-chevron-down"></i></a>
+            </div>
+            <div id="collapse-schema" class="collapse" role="tabpanel" aria-labelledby="schema-11"
+                data-bs-parent="#accordion-4" style="">
+                <div class="schema-option mt-4">
+                    <div class="mb-3">
+                        <x-form.selectbox name="is_schema" class="rounded-0" labelName="Enable Schema?">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </x-form.selectbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- disclosure --}}
+        <div class="table-option-box">
+            <div class="d-flex align-items-center justify-content-between">
+                <strong>Disclosure</strong>
+                <a class="collapsed" data-bs-toggle="collapse" href="#collapse-disclosure"
+                    aria-expanded="false" aria-controls="collapse-disclosure"><i
+                        class="fas text-dark fa-chevron-down"></i></a>
+            </div>
+            <div id="collapse-disclosure" class="collapse" role="tabpanel"
+                aria-labelledby="disclosure-11" data-bs-parent="#accordion-4" style="">
+                <div class="disclosure-option mt-4">
+                    <div class="mb-3">
+                        <x-form.selectbox name="is_disclosure" class="rounded-0"
+                            labelName="Enable Disclosure?">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </x-form.selectbox>
+                    </div>
+                    <div class="mb-3 disclosure-text" style="display: none;">
+                        <x-form.textbox name="disclosure" class="rounded-0"
+                            labelName="Disclosure Text" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

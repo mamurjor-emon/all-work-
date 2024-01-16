@@ -1,0 +1,68 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Payment Success</title>
+    <style>
+        
+        .circal i {
+            border: 3px solid #40bf35;
+            width: 50px;
+            height: 50px;
+            padding-top: 8px;
+            font-size: 30px;
+            border-radius: 50%;
+            color: #40bf35;
+        }
+		.circal img{
+			width:50%;
+			overflow:hidden
+		}
+        .lead{
+            font-size: 20px;
+        }
+		.btn-resend{
+			padding-bottom:22px;
+			}
+    </style>
+  </head>
+  <body>
+    
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <div class="card">
+                    <div class="card-body pt-0 px-2">
+                        <div class="text-center">
+                            <div class="circal">
+							<lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_3ghvm6sn.json" background="transparent"  speed="1"  loop  autoplay></lottie-player>
+                                
+                            </div>
+         
+							<p class="resent-text lead">Didn't get the email? Please check your spam folder or </p>
+                        </div>
+                        <div class="text-center mt-2 btn-resend">
+                            <a href="{{ route('email.verify.resend', $user_id) }}" class=" btn btn-success">Resend</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <div class=""></div>
+  </body>
+</html>

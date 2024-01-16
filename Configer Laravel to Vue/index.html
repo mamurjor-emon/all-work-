@@ -1,0 +1,61 @@
+<!-- Create New Project  -->
+composer create-project laravel/laravel app-name
+<!-- Create Database  -->
+php artisan migrate
+<!-- Install Vue  -->
+npm Install
+<!-- Install Vue Route & Axios  -->
+npm install vue vue-router vue-axios --save
+<!-- Intall Vite  Plugin -->
+npm i @vitejs/plugin-vue
+<!-- Go To web.php  -->
+Route::get('/{any}', function () {
+    return view('welcome');
+})->where('any','.*');
+<!-- Go To resours/js.app.js  -->
+import './bootstrap';
+import { createApp } from "vue";
+import App from './layouts/app.vue';
+import router from './router';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
+const app = createApp(App);
+// Use Vue Router
+app.use(router);
+// Use VueAxios with Axios
+app.use(VueAxios, axios);
+app.mount('#app');
+
+<!-- Create A New File in router.js in resources/js  -->
+import { createWebHistory, createRouter } from "vue-router";
+import home from "./frontend/pages/home.vue";
+const routes = [
+    {
+        path: '/',
+        name: 'Home',
+        component: home,
+    },
+];
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+});
+export default router;
+
+<!-- Config To vite.config.js   -->
+import { defineConfig } from 'vite';
+import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
+
+export default defineConfig({
+    plugins: [
+        vue(),
+        laravel({
+            input: ['resources/css/app.css', 'resources/js/app.js'],
+            refresh: true,
+        }),
+    ],
+});
+
+

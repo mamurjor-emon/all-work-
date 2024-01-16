@@ -1,0 +1,43 @@
+ var edit_table = new bootstrap.Modal(document.getElementById('edit_workspace_table'), {
+            keyboard: false,
+            backdrop: 'static'
+        })
+
+        $(document).on('click', '#workspace-edit', function() {
+            var manage_id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('client.workspaces.create.table.edit') }}",
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id: manage_id,
+                },
+                success: function(res) {
+                    $('#edit_id').val(res.table.id);
+                    $('#title').val(res.table.title);
+
+                    var selectBox = $('#category');
+                    selectBox.empty();
+                    $.each(res.category, function(index, item) {
+                        var option = $('<option>').val(item.id).text(item.name);
+                        if (item.id === res.table.category_id) {
+                            option.attr('selected', 'selected');
+                        }
+                        selectBox.append(option);
+                    });
+
+                    var selectBox = $('#website');
+                    selectBox.empty();
+                    $.each(res.website, function(index, item) {
+                        var option = $('<option>').val(item.id).text(item.domain);
+                        if (item.id === res.table.website_id) {
+                            option.attr('selected', 'selected');
+                        }
+                        selectBox.append(option);
+                    });
+                    edit_table.show()
+                }
+            });
+        })

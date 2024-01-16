@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="utf-8"> <!-- utf-8 works for most cases -->
+    <meta name="viewport" content="width=device-width"> <!-- Forcing initial-scale shouldn't be necessary -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Use the latest (edge) version of IE rendering engine -->
+    <meta name="x-apple-disable-message-reformatting">  <!-- Disable auto-scale in iOS 10 Mail entirely -->
+    <title></title> <!-- The title tag shows in email notifications, like Android 4.4. -->
+
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700" rel="stylesheet">
+
+    <!-- CSS Reset : BEGIN -->
+    <style>
+        html,
+body {
+    margin: 0 auto !important;
+    padding: 0 !important;
+    height: 100% !important;
+    width: 100% !important;
+    background: #f1f1f1;
+}
+
+/* What it does: Stops email clients resizing small text. */
+* {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* What it does: Centers email on Android 4.4 */
+div[style*="margin: 16px 0"] {
+    margin: 0 !important;
+}
+.success-message {
+	color: green !important;
+	font-weight: 500 !important;
+}
+
+/* What it does: Stops Outlook from adding extra spacing to tables. */
+table,
+td {
+    mso-table-lspace: 0pt !important;
+    mso-table-rspace: 0pt !important;
+}
+
+/* What it does: Fixes webkit padding issue. */
+table {
+    border-spacing: 0 !important;
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+    margin: 0 auto !important;
+}
+
+img {
+    -ms-interpolation-mode:bicubic;
+}
+
+a {
+    text-decoration: none;
+}
+
+*[x-apple-data-detectors],  /* iOS */
+.unstyle-auto-detected-links *,
+.aBn {
+    border-bottom: 0 !important;
+    cursor: default !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+img.g-img + div {
+    display: none !important;
+}
+
+
+	    .primary{
+	background: #17bebb;
+}
+.bg_white{
+	background: #ffffff;
+}
+.bg_light{
+	background: #f7fafa;
+}
+.bg_black{
+	background: #000000;
+}
+.bg_dark{
+	background: rgba(0,0,0,.8);
+}
+.email-section{
+	padding:2.5em;
+}
+
+/*BUTTON*/
+.btn{
+	padding: 10px 15px;
+	display: inline-block;
+}
+.btn.btn-white{
+	border-radius: 5px;
+	background: #ffffff;
+	color: #000000;
+}
+.btn.btn-white-outline{
+	border-radius: 5px;
+	background: transparent;
+	border: 1px solid #fff;
+	color: #fff;
+}
+.btn.btn-black-outline{
+	border-radius: 0px;
+	background: transparent;
+	border: 2px solid #000;
+	color: #000;
+	font-weight: 700;
+}
+.btn-custom{
+	color: rgba(0,0,0,.3);
+	text-decoration: underline;
+}
+
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Work Sans', sans-serif;
+	color: #000000;
+	margin-top: 0;
+	font-weight: 400;
+}
+
+body{
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 1.8;
+	color: rgba(0,0,0,.4);
+}
+
+a{
+	color: #17bebb;
+}
+
+table{
+}
+/*LOGO*/
+
+.logo h1{
+	margin: 0;
+}
+.logo h1 {
+	color: #17bebb;
+	font-size: 24px;
+	font-weight: 700;
+	font-family: 'Work Sans', sans-serif;
+}
+
+/*HERO*/
+.hero{
+	position: relative;
+	z-index: 0;
+}
+
+.hero .text{
+	color: rgba(0,0,0,.3);
+}
+.hero .text h2{
+	color: #000;
+	font-size: 34px;
+	margin-bottom: 15px;
+	font-weight: 300;
+	line-height: 1.2;
+}
+.hero .text h3{
+	font-size: 24px;
+	font-weight: 200;
+}
+.hero .text h2 span{
+	font-weight: 600;
+	color: #000;
+}
+
+
+/*PRODUCT*/
+.product-entry{
+	display: block;
+	position: relative;
+	float: left;
+}
+.product-entry .text{
+	width: calc(120% - 125px);
+	padding-left: 20px;
+}
+.product-entry .text h3 {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	white-space: nowrap;
+	line-height: 38px;
+}
+.product-entry .text p{
+	margin-top: 0;
+}
+
+
+ul.social{
+	padding: 0;
+}
+ul.social li{
+	display: inline-block;
+	margin-right: 10px;
+}
+
+/*FOOTER*/
+
+.footer{
+	border-top: 1px solid rgba(0,0,0,.05);
+	color: rgba(0,0,0,.5);
+}
+.footer .heading{
+	color: #000;
+	font-size: 20px;
+}
+.footer ul{
+	margin: 0;
+	padding: 0;
+}
+.footer ul li{
+	list-style: none;
+	margin-bottom: 10px;
+}
+.footer ul li a{
+	color: rgba(0,0,0,1);
+}
+
+    </style>
+
+
+</head>
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
+	<center style="width: 100%; background-color: #f1f1f1;">
+    <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+      &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+    </div>
+    <div style="max-width: 600px; margin: 0 auto;padding-top: 35px; padding-bottom: 35px;" class="email-container">
+    	<!-- BEGIN BODY -->
+      <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+      	<tr>
+          <td valign="top" class="bg_white" style="padding: 1em 2.5em 0 2.5em;">
+          	<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+          		<tr>
+          			<td class="logo" style="text-align: left;">
+			            <h1 style="text-align: center;">FDTBOOKING</h1>
+			          </td>
+          		</tr>
+          	</table>
+          </td>
+	      </tr><!-- end tr -->
+				<tr>
+          <td valign="middle" class="hero bg_white" style="padding: 2em 0 2em 0;">
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+            	<tr>
+            		<td style="padding: 0 2.5em; text-align: left;">
+            			<div class="text">
+            				<h2 class="success-message">Congrats! Payment Successfull</h2>
+            			</div>
+            		</td>
+            	</tr>
+            </table>
+          </td>
+	      </tr><!-- end tr -->
+	      <tr>
+	      	<table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+					  <tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
+					  	<td style="width: 55%; padding-bottom: 50px !important;">
+					  		<div class="product-entry">
+					  			<div class="text">
+					  				<h3>Name:</h3>
+					  				<h3>Email:</h3>
+					  				<h3>Test Center Id:</h3>
+					  				<h3>Center Date Id:</h3>
+					  				<h3>Driving License:</h3>
+					  				<h3>Address:</h3>
+					  				<h3>Mobile No:</h3>
+					  				<h3>Certificate Number:</h3>
+					  				<h3>Expiry Date:</h3>
+					  				<h3>Transmission:</h3>
+					  			</div>
+					  		</div>
+					  	</td>
+					  	<td  width="45%" style="padding-bottom: 50px !important;">
+					  		<span class="price" style="color: #000; font-size: 20px;">name</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">email</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">test_center_id</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">test_center_date_id</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">driving_license</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">address</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">mobile_no</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">theory_certificate_number</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">theory_expiry_date</span><br>
+					  		<span class="price" style="color: #000; font-size: 20px;">transmission</span>
+					  	</td>
+					  </tr>
+
+	      	</table>
+	      </tr><!-- end tr -->
+      <!-- 1 Column Text + Button : END -->
+      </table>
+      <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: auto;">
+        <tr>
+          <td class="bg_white" style="text-align: center;">
+          	<p>No longer want to receive these email? You can <a href="#" style="color: rgba(0,0,0,.8);">Unsubscribe here</a></p>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </center>
+</body>
+</html>

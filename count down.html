@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="countdown">
+        <span id="days"></span> days
+        <span id="hours"></span> hours
+        <span id="minutes"></span> minutes
+        <span id="seconds"></span> seconds
+      </div>
+
+      <script>
+        // Set the countdown date and time (in UTC)
+        var countdownDate = new Date("2023-05-31T00:00:00Z").getTime();
+      
+        // Update the countdown every second
+        var countdownInterval = setInterval(function() {
+      
+          // Get the current date and time (in UTC)
+          var now = new Date().getTime();
+      
+          // Calculate the remaining time until the countdown date and time
+          var remainingTime = countdownDate - now;
+      
+          // Calculate the days, hours, minutes, and seconds remaining
+          var days = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+      
+          // Update the countdown timer in the HTML
+          document.getElementById("days").innerHTML = days;
+          document.getElementById("hours").innerHTML = hours;
+          document.getElementById("minutes").innerHTML = minutes;
+          document.getElementById("seconds").innerHTML = seconds;
+      
+          // If the countdown is finished, clear the interval
+          if (remainingTime < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("countdown").innerHTML = "Countdown finished!";
+          }
+        }, 1000);
+      </script>
+      
+</body>
+</html>

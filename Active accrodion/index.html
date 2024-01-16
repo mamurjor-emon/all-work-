@@ -1,0 +1,173 @@
+<section id="faq-page" class="py-100">
+    <div class="faq-page-area">
+        <div class="container">
+            <div class="row d-flex align-items-center justify-content-between">
+                <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-12">
+                    <div class="">
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="{{ asset('frontend/mamurjor/image/single-hero-image/faq.png') }}"
+                                    alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-7 col-xl-7 col-lg-7 col-md-12">
+                    <div class="faq-page-title-area">
+                        <h3 class="single-hero-heading">Questions about This Project </h3>
+                        <p class="single-subtitle my-4">Integer tempore, diamlorem quasi pharetra mauris viverra
+                            ultrices! Ratione officiis? Ligula ullamco est eget consectetur laboris, minus inventore.
+                            Justo neque illo aliquid.</p>
+                    </div>
+                    <div class="faq-page-accordion-area mt-5">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header faq-accordion-header position-relative" id="headingOne"
+                                    onclick="activeAccordion('#headingOne')">
+                                    <button class="faq-accordion-button" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-controls="collapseOne" aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                        <h1>How can I consult with the team?</h1>
+                                    </button>
+                                    <div class="faq-accordion-icons position-absolute">
+                                        <button data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                            aria-controls="collapseOne" aria-expanded="false">
+                                            <i class="fa fa-solid fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <strong>This is the first item's accordion body.</strong> It is shown by
+                                        default, until the collapse plugin adds the appropriate classes that we use to
+                                        style each element. These classes control the overall appearance, as well as the
+                                        showing and hiding via CSS transitions. You can modify any of this with custom
+                                        CSS or overriding our default variables. It's also worth noting that just about
+                                        any HTML can go within the <code>.accordion-body</code>, though the transition
+                                        does limit overflow.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mt-5">
+                                <h2 class="accordion-header faq-accordion-header position-relative accordionActive"
+                                    id="headingTwo" onclick="activeAccordion('#headingTwo')">
+                                    <button class="faq-accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true"
+                                        aria-controls="collapseTwo">
+                                        <h1>Do you provide support on holidays?</h1>
+                                    </button>
+                                    <div class="faq-accordion-icons position-absolute">
+                                        <button data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                                            aria-controls="collapseTwo" aria-expanded="true">
+                                            <i class="fa fa-solid fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse show"
+                                    aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <strong>This is the second item's accordion body.</strong> It is hidden by
+                                        default, until the collapse plugin adds the appropriate classes that we use to
+                                        style each element. These classes control the overall appearance, as well as the
+                                        showing and hiding via CSS transitions. You can modify any of this with custom
+                                        CSS or overriding our default variables. It's also worth noting that just about
+                                        any HTML can go within the <code>.accordion-body</code>, though the transition
+                                        does limit overflow.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item mt-5">
+                                <h2 class="accordion-header faq-accordion-header position-relative" id="headingThree"
+                                    onclick="activeAccordion('#headingThree')">
+                                    <button class="faq-accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        <h1>What types of systems do you support?</h1>
+                                    </button>
+                                    <div class="faq-accordion-icons position-absolute">
+                                        <button data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                            aria-controls="collapseThree" aria-expanded="false">
+                                            <i class="fa fa-solid fa-chevron-down"></i>
+                                        </button>
+                                    </div>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <strong>This is the third item's accordion body.</strong> It is hidden by
+                                        default, until the collapse plugin adds the appropriate classes that we use to
+                                        style each element. These classes control the overall appearance, as well as the
+                                        showing and hiding via CSS transitions. You can modify any of this with custom
+                                        CSS or overriding our default variables. It's also worth noting that just about
+                                        any HTML can go within the <code>.accordion-body</code>, though the transition
+                                        does limit overflow.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script>
+    function activeAccordion(data) {
+        $(document).on('click', data, function() {
+            var value = $(this).find('.faq-accordion-button').attr('aria-expanded');
+            if(value != 'true'){
+                $(this).removeClass('accordionActive');
+            }else{
+                $('#faq-page .accordionActive').removeClass('accordionActive');
+            $(this).addClass('accordionActive');
+            }
+        });
+    }
+</script>
+
+
+style 
+
+.faq-accordion-header {
+	background-color: #2A435D !important;
+    border: none !important;
+	border-radius: 4px;
+	padding: 3.5rem 2rem;
+    margin-bottom: 0px !important;
+}
+.faq-accordion-header h1 {
+	font-size: 15px;
+	color: white;
+	font-weight: 600;
+}
+.faq-accordion-icons {
+	right: 2rem;
+	top: 26%;
+}
+.faq-accordion-icons i {
+	font-size: 13px;
+	color: white;
+	width: 30px;
+	height: 30px;
+	background: #4ADAD0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+}
+.faq-page-accordion-area .accordion-body {
+	padding: 1rem 2rem;
+	border: 1px solid #4ADAD0;
+}
+/* active class css in accordion  */
+
+.accordionActive{
+	background: #4ADAD0 !important;
+}
+.accordionActive .faq-accordion-icons i {
+	background: white !important;
+	color: #4ADAD0 !important;
+}

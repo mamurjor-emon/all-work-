@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #code{
+            background: wheat;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+        <pre id="code">
+        hello i am emon hossen now i am web devolper in laravel. I Work in last 7 months in laravel project, I want to finshed in 4 laravel project in multi daymentional page, i work in mamurjor it in mirpur 10, astha  bhobon  lift 4 , thanks for copy code..
+        </pre>
+        <button onclick="copyCode()">Copy Code</button>
+        <script>
+            function copyCode() {
+              // Get the code element
+              var codeElement = document.getElementById("code");
+      
+              // Select the code element's text
+              var range = document.createRange();
+              range.selectNode(codeElement);
+              window.getSelection().removeAllRanges();
+              window.getSelection().addRange(range);
+      
+              // Copy the selected text to the clipboard
+              document.execCommand("copy");
+            }
+          </script>
+        
+</body>
+
+</html>

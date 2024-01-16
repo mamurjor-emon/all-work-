@@ -1,0 +1,86 @@
+for this link   
+<link  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"  rel="stylesheet"  integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"  crossorigin="anonymous">
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"  crossorigin="anonymous"></script>  
+<script  type="text/javascript"  src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script  type="text/javascript"  src="dist/js/spartan-multi-image-picker-min.js"></script>
+
+
+
+		this code of  images show in view page or ect 
+		<div class="col-md-12 mt-2 mb-3">
+			<label for="facebook">Banner</label>
+			<div id="banner_image"></div>
+			<input type="hidden" name="banner_image_old" value="{{ $banner_content->banner_image ?? '' }}">
+			@error('banner_image')
+				<span class="text-danger"><i
+					class="far fa-times-circle fa-sm"></i>
+				{{ $message }}</span>
+			@enderror
+		</div>
+		
+		
+		
+															
+											
+    $('#banner_image').spartanMultiImagePicker({
+        fieldName: 'banner_image',
+        maxCount: 1,
+        rowHeight: '200px',
+        groupClassName: 'col-md-12 com-sm-12 com-xs-12 mb-0 p-0',
+        maxFileSize: '',
+        dropFileLabel: 'Drop Here',
+        allowExt: 'png|jpg|jpeg',
+        onExtensionErr: function (index, file) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Only png, jpg and jpeg file format allowed!'
+            });
+        }
+    });
+
+    @if(isset($banner_content-> banner_image))
+        $('#banner_image img.spartan_image_placeholder').css('display', 'none');
+        $('#banner_image .spartan_remove_row').css('display', 'none');
+        $('#banner_image .img_').css('display', 'block');
+        $('#banner_image .img_').attr('src', '{{ asset($banner_content-> banner_image) }}');
+    @endif
+	
+	
+	this code of profile avatar => 
+	
+	  <div class="col-md-4">
+		<div class="form-group">
+			<label for="" class="col-form-label">Avatar</label>
+			<div id="avatar">
+
+			</div>
+			<input type="hidden" name="old_avatar" value="{{ Auth::user()->avatar }}">
+		</div>
+	</div>
+
+	
+	
+ $('#avatar').spartanMultiImagePicker({
+                fieldName: 'avatar',
+                maxCount: 1,
+                rowHeight: '200px',
+                groupClassName: 'col-md-12 com-sm-12 com-xs-12 mb-0 p-0',
+                maxFileSize: '',
+                dropFileLabel: 'Drop Here',
+                allowExt: 'png|jpg|jpeg',
+                onExtensionErr: function(index, file) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Only png, jpg and jpeg file format allowed!'
+                    });
+                }
+            });
+
+            @if (Auth::user()->avatar)
+                $('#avatar img.spartan_image_placeholder').css('display', 'none');
+                $('#avatar .spartan_remove_row').css('display', 'none');
+                $('#avatar .img_').css('display', 'block');
+                $('#avatar .img_').attr('src', '{{ asset(Auth::user()->avatar) }}');
+            @endif	

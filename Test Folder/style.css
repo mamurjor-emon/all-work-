@@ -1,0 +1,37 @@
+.product-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .product-table th, .product-table td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  .product-table th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .product-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .product-table tr:hover {
+    background-color: #ddd;
+  }
+  
+  .product-table td:nth-child(3) {
+    text-align: right;
+  }
+  
+  .product-table td:nth-child(4) {
+    text-align: center;
+    font-weight: bold;
+    color: green;
+  }
+  
+  .product-table td:nth-child(4):contains("Out of Stock") {
+    color: red;
+  }
+  

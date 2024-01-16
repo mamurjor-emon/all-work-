@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main-page-loader {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 9999;
+            background-color: #fff;
+        }
+        #page-loader {
+            border: 10px solid rgba(217, 217, 217, 0.5);
+            border-radius: 50%;
+            border-top: 10px solid #3F3CF3;
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            left: 50%;
+            right: 0;
+            top: 50%;
+            margin-left: -60px;
+            margin-top: -60px;
+            bottom: 0;
+            -webkit-animation: spin 2s linear infinite;
+            -o-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main-page-loader"><div id="page-loader"></div></div>
+
+    <script>
+           /*  Page Loading */
+           document.onreadystatechange = function () {
+            var state = document.readyState;
+            if (state == "interactive") {
+                document.getElementById("mainbody").style.visibility = "hidden";
+            } else if (state == "complete") {
+                setTimeout(function () {
+                document.getElementById("interactive");
+                document.getElementById("main-page-loader").style.visibility = "hidden";
+                document.getElementById("mainbody").style.visibility = "visible";
+                }, 500);
+            }
+        };
+    </script>
+</body>
+</html>

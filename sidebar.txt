@@ -1,0 +1,206 @@
+@auth
+    @if (Auth::user()->admin_panel == 2)
+        <li class="pt-2 pb-1">
+            <span class="nav-item-head">Dashboard</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.dashboard', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.orders.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Orders</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.tickets.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Tickets</span>
+            </a>
+        </li>
+
+        <li class="pt-2 pb-1">
+            <span class="nav-item-head">Billing</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.invoices.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Invoices</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.subscirptions.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Subscirptions</span>
+            </a>
+        </li>
+
+        <li class="pt-2 pb-1">
+            <span class="nav-item-head">Account</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.profile.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Profile</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.payments.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Payments</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.panel.afflliates.index', admin_workspace()) }}">
+              <i class="mdi mdi-compass-outline menu-icon"></i>
+              <span class="menu-title">Reffer a friend</span>
+            </a>
+        </li>
+    @else
+        @if (Gate::allows('isAdmin', Auth::user()))
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">Dashboard</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.dashboard', admin_workspace()) }}">
+                  <i class="mdi mdi-home menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.orders.index', admin_workspace()) }}">
+                  <i class="mdi mdi-shopping menu-icon"></i>
+                  <span class="menu-title">Orders</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.clients.index', admin_workspace()) }}">
+                  <i class="mdi mdi-account-multiple menu-icon"></i>
+                  <span class="menu-title">Clients</span>
+                </a>
+            </li>
+
+
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">setup</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.services.index',admin_workspace()) }}">
+                  <i class="mdi mdi-briefcase menu-icon"></i>
+                  <span class="menu-title">Services</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.forms.index',admin_workspace()) }}">
+                  <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                  <span class="menu-title">Order Forms</span>
+                </a>
+            </li>
+
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">marketing</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.coupons.index', admin_workspace()) }}">
+                  <i class="mdi mdi-percent menu-icon"></i>
+                  <span class="menu-title">Coupons</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.files.index', admin_workspace()) }}">
+                  <i class="mdi mdi-account-multiple menu-icon"></i>
+                  <span class="menu-title">Files</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.tickets.index', admin_workspace()) }}">
+                  <i class="mdi mdi-ticket-account menu-icon"></i>
+                  <span class="menu-title">Tickets</span>
+                </a>
+            </li>
+
+            <!--<li class="nav-item">-->
+            <!--    <a class="nav-link" href="#">-->
+            <!--      <i class="mdi mdi-hand-pointing-right menu-icon"></i>-->
+            <!--      <span class="menu-title">Affiliates</span>-->
+            <!--    </a>-->
+            <!--</li>-->
+
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">Billing</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.invoices.index', admin_workspace()) }}">
+                  <i class="mdi mdi-file-send menu-icon"></i>
+                  <span class="menu-title">Invoices</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.subscriptions.index', admin_workspace()) }}">
+                  <i class="mdi mdi-compass-outline menu-icon"></i>
+                  <span class="menu-title">Subscriptions</span>
+                </a>
+            </li>
+
+
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">Modules</span>
+            </li>
+            <li class="nav-item">
+                {{-- {{ route(user_role_name().'.integrations.index',admin_workspace()) }} --}}
+                <span class="nav-link" href="">
+                  <i class="mdi mdi-compass-outline menu-icon"></i>
+                  <span class="menu-title">Integrations</span>
+                </span>
+            </li>
+
+
+            <li class="pt-2 pb-1">
+                <span class="nav-item-head">More Features</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.settings.index',admin_workspace()) }}">
+                  <i class="mdi mdi-settings menu-icon"></i>
+                  <span class="menu-title">Settings</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route(user_role_name().'.settings.payments.index',admin_workspace()) }}">
+                  <i class="mdi mdi-cash-multiple menu-icon"></i>
+                  <span class="menu-title">Payments</span>
+              </a>
+          </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route(user_role_name().'.upgrade.index',admin_workspace()) }}">
+                  <i class="mdi mdi-account-switch menu-icon"></i>
+                  <span class="menu-title">Upgrade</span>
+                </a>
+            </li>
+        @elseif (Gate::allows('isAdminManager', Auth::user()))
+
+        @elseif (Gate::allows('isManager', Auth::user()))
+          @include('backend.admin.include.manager-sidebar')
+        @elseif (Gate::allows('isContractor', Auth::user()))
+          @include('backend.admin.include.contractor-sidebar')
+        @else
+
+        @endif
+    @endif
+@endauth
+
+

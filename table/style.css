@@ -1,0 +1,43 @@
+.table_body {
+    width: 100%;
+    text-align: center;
+}
+
+.table_body thead tr {
+   background:#F3F6F9;
+   font-size: 15px;
+   color: #595959;
+}
+.table_body thead tr th {
+   padding: 12px 0;
+}
+
+.table_body tbody tr {
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.table_body tbody tr td p a:hover {
+    cursor: pointer;
+    font-weight: 400;
+    color: rgb(1, 117, 1);
+    transition: ease-in-out;
+}
+
+.table_body tbody tr td a img {
+        width: 75%;
+        padding: 6px 0;
+        border-radius: 50%;
+}
+.table_body tbody tr td a {
+    text-decoration: none;
+    background: #EBF9F1;
+    padding: 6px 29px;
+    color: rgb(1, 117, 1);
+    font-weight: 600;
+    transition: all 0.3s;
+    border-radius: 50px;
+}
+.table_body tbody tr td a:hover {
+    background:rgb(1, 117, 1);
+    color: #fff;
+}

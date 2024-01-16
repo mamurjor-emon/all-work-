@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Emon</title>
+    <link rel="stylesheet" href="./radio_button.css">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="{{ asset(file_exists(config('settings.favicon')) ? config('settings.favicon') : '') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.ckeditor.com/4.20.2/standard-all/ckeditor.js"></script>
+
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <style>
+
+        table.table tbody tr td:last-child {
+            text-align: right;
+        }
+
+        input,
+        select:focus {
+            box-shadow: none !important;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .coupon-btn {
+            text-decoration: none;
+            color: #283974;
+        }
+
+        .apply-coupon {
+            border-radius: 0 3px 3px 0 !important;
+        }
+
+        img.paypal-img {
+            width: 80px;
+        }
+
+        .formbuilder-checkbox input {
+            vertical-align: middle !important;
+        }
+
+        .card-preloader {
+            background: rgba(255, 255, 255, .8);
+            z-index: 99;
+        }
+
+        #payment-form {
+            padding: 0 30px;
+        }
+
+        .card-box {
+            padding: 0;
+            padding-left: 10px;
+            list-style: none;
+            margin: 0;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .card-box li {
+            display: inline-block;
+            padding: 3px 0;
+        }
+
+        .card-box li img {
+            width: 40px
+        }
+
+        .card-box li img.paypal-image {
+            width: 120px
+        }
+
+        .card-box li span {
+            font-size: 14px;
+            color: #000;
+            margin-left: 5px;
+        }
+
+        .card-box li input {
+            margin-right: 5px;
+        }
+
+        /* Card Input */
+
+        .StripeElement {
+            background-color: white;
+            padding: 8px 14px;
+            border-radius: 4px;
+            border: 1px solid #E4E4E4;
+        }
+
+        .StripeElement--focus {
+            border-color: #00CCFF;
+        }
+
+        .StripeElement--invalid {
+            border-color: #FF0033;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #F9F9F9 !important;
+        }
+
+        #card-errors {
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            font-size: 12px;
+            display: block;
+            height: 20px;
+            padding: 4px 0;
+            color: #FF2255;
+        }
+
+        .field--focus {
+            border-color: #00CCFF;
+        }
+
+        .field--invalid {
+            border-color: #FF2255;
+        }
+
+        .field--webkit-autofill {
+            background-color: #F9F9F9 !important;
+        }
+
+        .form-label {
+            margin-top: 7px
+        }
+
+        .CardField-postalCode {
+            display: none !important;
+        }
+
+        .payment-method .payment-group>label {
+            width: 96%;
+        }
+
+        .error:focus {
+            border-color: #ff0854;
+        }
+
+        .error {
+            border-color: #ff0854;
+        }
+
+        /* now coded me  */
+        #apply-btn:focus {
+        box-shadow: none !important;
+        }
+        .btn-toolbar .input-group {
+            width: 100% !important;
+        }
+        .form-title {
+            font-size: 20px;
+            color: #283974;
+            font-weight: 600 !important;
+        }
+        .order_form{
+            background: #F4F7FF;
+        }
+        .card {
+            padding: 18px 15px;
+            border: none;
+            box-shadow: 0rem 0.3125rem 0.3125rem 0rem rgba(82, 63, 105, 0.05);
+         }
+
+         .my-card_value h5{
+            font-size: 15px;
+         }
+         .border_color{
+            border-bottom: 1px solid #d1cdcd
+         }
+         #country\ :focus , #service_select:focus,  input:focus{
+        background: #ebebeb;
+        padding: 7px !important;
+        border: 1px solid #2954CE !important;
+        }
+
+        #country\ ,#service_select, input{
+            background: #ebebeb !important;
+            padding: 7px !important;
+            border: 1px solid #ebebeb;
+        }
+        .purchase-card {
+            padding: 20px 15px;
+            background: #fff;
+            position: fixed !important;
+            width: 26% !important;
+            box-shadow: 0rem 0.3125rem 0.3125rem 0rem rgba(82, 63, 105, 0.05);
+        }
+
+        .order_summary {
+        font-weight: 500;
+        color: #283974;
+        }
+        .purchase-btn {
+        height: 45px;
+        border: 1px solid #fff;
+        background : #1e79ffed;
+        font-weight: 600;
+        }
+
+        .purchase-btn:hover {
+            border: 1px solid #fff;
+            background: #0d6efd;
+            color: #fff;
+        }
+        tr{
+            border-color: #aaa7a7;
+            font-size: 14px;
+        }
+
+        .all_payment_method {
+            color: black;
+            margin-top: 22px;
+        }
+        /* payment_method */
+        .payment_method > input:checked +.radio_btn{
+            background: red;
+            color: green;
+        }
+        .order_form_logo{
+            width: 20%;
+        }
+    </style>
+
+
+</head>
+
+<body class="order_form">
+
+    <div class="container">
+        <div class="row justify-content-center py-5 ">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body px-4">
+                        <div class="order-form-header mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <img class="order_form_logo" src="{{ asset('img/doppcal.png') }}" alt=""><br>
+                                <strong class="form-title">{{ $form->name }}</strong>
+                            </div>
+
+                        </div>
+
+                        <form action="{{ route('user.saveform') }}" method="post" id="client-form_cancel" enctype="multipart/form-data">
+                            @csrf
+                        if($form->captcha==1){
+                            @endphp
+                            <div class="row">
+                                <div class="form-group">
+                                    <strong>Recaptcha:</strong>
+                                    {!! NoCaptcha::renderJs() !!}
+                                    {!! NoCaptcha::display() !!}
+                                </div>
+
+                        </div>
+
+                            {{-- service calculation --}}
+                            <input disabled type="hidden" id="subtotal" name="subtotal" value="0.00" >
+                            <input disabled type="hidden" id="role_id" name="role_id" value="3">
+                            <input disabled type="hidden" id="gateway-charge" name="charge" value="0.00">
+                            <input disabled type="hidden" id="gateway-amount" name="total_amount" value="0.00">
+                            <input disabled type="hidden" id="discount_amount" name="discount_amount" value="0.00">
+                            <input disabled type="hidden" id="coupon_code" name="coupon_code" value="0.00">
+                            <input disabled type="hidden" id="grand_total" name="gran_total_amount" value="0.00"><br>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 position-relative purchase-card">
+                    {{-- preloader --}}
+                    <div class="card-preloader position-absolute top-0 start-0 w-100 h-100 d-none">
+                        <img src="{{ asset('images/loader.svg') }}"
+                            class="position-absolute translate-middle top-50 start-50" alt="preloader">
+                    </div>
+                    <div class="card-body px-3">
+                        <div class="position-sticky">
+                            <div class="invoice-items" id="preview">
+
+                                <div class="my-card_value">
+                                    <div>
+                                         <strong class="form-title">Order Summary</strong>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3 mt-3 border_color">
+                                        <h5>Subtotal</h5>
+                                        <h5>$<span id="subtotal">0.00</span></h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3 border_color">
+                                        <h5>Gateway Charge (5%)</h5>
+                                          <h5>$<span id="gateway-charge">0.00</span></h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3 border_color">
+                                        <h5><strong>Total</strong></h5>
+                                        <h5><strong>USD $<span
+                                         id="gateway-amount">0.00</span></strong></h5>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3" id="discount-total">
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between mb-3" id="grand-total">
+
+                                    </div>
+
+                                </div>
+                                <div class="btn-toolbar mb-3" id="coupon-fields" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="input-group">
+                                      <input type="text" name="coupon_code" id="coupon-field" class="form-control"
+                                            placeholder="Coupon code" value="">
+                                            <input type="hidden" name="service_id_for_match" id="service_id_for_match" class="form-control"
+                                            placeholder="Coupon code" value="" aria-describedby="apply-btn">
+                                      <button type="button" class="btn btn-primary apply-coupon" id="apply-btn">
+                                        Apply
+                                    </button>
+                                </div>
+                                    </div>
+                                <div class="all_payment_method">
+                                    <div class="row">
+
+                                        <div class="col-sm-6">
+                                            <div class="quiz_card_area">
+                                                <input class="quiz_checkbox" name="payment_type_select" type="radio" checked  />
+
+                                                <div class="single_quiz_card">
+                                                    <div class="quiz_card_content">
+                                                        <div class="quiz_card_icon">
+                                                            <div class="quiz_icon quiz_icon1">
+                                                                <img src="./stripe.png" alt="">
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <div class="quiz_card_area">
+                                                <input class="quiz_checkbox" name="payment_type_select" type="radio" />
+                                                <div class="single_quiz_card">
+                                                    <div class="quiz_card_content">
+                                                        <div class="quiz_card_icon">
+                                                            <div class="quiz_icon quiz_icon1">
+                                                                <img src="./paypal.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mt-2">
+                                    <button type="submit" class="btn btn-primary submit-form-btn  w-100 mt-3  purchase-btn ">Complete Purchase</button>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://formbuilder.online/assets/js/form-builder.min.js"></script>
+    <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+  
+
+        // csrf-token
+        var _token = "{{ csrf_token() }}";
+
+        // flash message
+        function flashMessage(status, message) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: status,
+                title: message,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                },
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 3000
+            })
+        }
+
+        // session flash message
+        @if (Session::get('success'))
+            flashMessage('success', "{{ Session::get('success') }}")
+        @elseif (Session::get('error'))
+            flashMessage('error', "{{ Session::get('error') }}")
+        @elseif (Session::get('info'))
+            flashMessage('info', "{{ Session::get('info') }}")
+        @elseif (Session::get('warning'))
+            flashMessage('warning', "{{ Session::get('warning') }}")
+        @endif
+
+
+        // match coupon data to database
+        $(document).on('click', '#apply-btn', function() {
+
+            let coupon = $('#coupon-field').val();
+            let total_amount = $('#gateway-amount').val();
+            let service_id_for_match = $("#service_id_for_match").val();
+
+
+            $.ajax({
+                url: "{{ route('payment.coupon.match') }}",
+                type: "post",
+                data: {
+                    _token: _token,
+                    coupon: coupon,
+                    amount : total_amount,
+                    service_id_for_match : service_id_for_match
+                },
+                success: function(res) {
+                    if (res.status == 'success') {
+                        $('#discount_amount').val(res.discount_amount);
+                        $('#grand_total').val(res.grand_total);
+                        $('#coupon_code').val(coupon);
+                        $('#discount-total').addClass('border_color')
+                        $('#discount-total').html('<h5>Discount Amount</h5><h5>USD $<span>'+res.discount_amount +'</span></h5>');
+
+                        $('#grand-total').html('<h5>Grand Total Amount</h5><h5>USD $<span id="gateway-amount">'+res.grand_total +'</span></h5>');
+                    } else {
+                       flashMessage(res.error,res.message)
+                    }
+                }
+            })
+        })
+
+
+
+
+</body>
+
+</html>

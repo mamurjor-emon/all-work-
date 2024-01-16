@@ -1,0 +1,19 @@
+<!-- this code is mail  -->
+public function content()
+{
+$imagePath = public_path('Container.png');
+return new Content(
+view: 'mail.mail',
+with: [
+'embeddedImage' => $imagePath,
+],
+);
+}
+
+
+
+<!-- and access the image  -->
+
+<img align="center" border="0" src="{{ $message->embed($embeddedImage) }}"
+    style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; clear: both; display: inline-block !important; border: none; height: auto; float: none; width: 42%; max-width: 235.2px;"
+    width="235.2" alt="image">

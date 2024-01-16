@@ -1,0 +1,258 @@
+@extends(__BLADE_EXTENDS__)
+@section('title', $title)
+@push('styles')
+<style>
+    .spartan_remove_row{
+        display: none !important;
+    }
+</style>
+@endpush
+
+@section('content')
+    <section class="bs-validation">
+        <div class="row mt-3">
+            <div class="col-md-7 mx-auto">
+                <div class="card px-4 shadow-none">
+                    <h4 class="card-title pt-3 mb-0 fw-bold text-dark">Edit your details</h4>
+                    <div class="card-body">
+                        <form method="POST"
+                            action="{{ route('admin.provider.profile.update', ['subdomain' => admin_workspace(), 'id' => $user->id]) }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+
+                            <x-form.textbox name="email" required="required" value="{{ $user->email ?? old('email') }}"
+                                errorName="email" placeholder="Email" labelName="Email" />
+
+                            <div class="row">
+                                <x-form.textbox parantClass="col-md-6" labelName="First Name" name="fname"
+                                    required="required" value="{{ $user->fname ?? old('fname') }}" errorName="fname"
+                                    placeholder="First Name" />
+
+                                <x-form.textbox parantClass="col-md-6" labelName="Last Name" name="lname"
+                                    required="required" value="{{ $user->lname ?? old('lname') }}" errorName="lname"
+                                    placeholder="Last Name" />
+                            </div>
+
+                            <div class="row">
+                                <x-form.textbox parantClass="col-md-8" name="biling_address"
+                                    value="{{ $user->biling_address ?? old('biling_address') }}" errorName="biling_address"
+                                    labelName="Billing Address" alert="Address" />
+                                <x-form.textbox parantClass="col-md-4" name="city"
+                                    value="{{ $user->city ?? old('city') }}" errorName="city" labelName="City"
+                                    labelClass="opacity-0" alert="City" />
+                            </div>
+
+                            <div class="row">
+                                <x-form.selectbox class="select2" parentClass="col-md-4" name="country"
+                                    value="{{ old('country') }}" errorName="country" alert="Country">
+                                    <option value="">Select Country</option>
+                                    @include('backend.include.country-option', [
+                                        'country' => $user->country,
+                                    ])
+                                </x-form.selectbox>
+
+                                <x-form.textbox parantClass="col-md-4" name="state"
+                                    value="{{ $user->state ?? old('state') }}" errorName="state"
+                                    alert="State/Province/Region" />
+
+                                <x-form.textbox parantClass="col-md-4" name="zip_code"
+                                    value="{{ $user->zip_code ?? old('postal') }}" errorName="zip_code"
+                                    alert="Postal/Zip Code" />
+                            </div>
+
+                            {{-- <div class="mb-1">
+                            <div class="checkbox-check">
+                                <input name="purchasing_type" value="1" @isset($user->client) {{ $user->client->purchasing_company == 1 ? 'checked' : '' }}  @endisset id="purchasing_type" class="checkbox" type="checkbox" />
+                                <label for="purchasing_type" class="form-check-label">I am purchasing for a company</label>
+                            </div>
+
+                            @error('purchasing_type')
+                                <span class="text-danger error-text">{{ $message }}</span>
+                            @enderror
+                        </div> --}}
+
+                            {{-- <div class="company_box @isset($user->client) {{ $user->client->purchasing_company == 1 ? '' : 'd-none' }} @endisset d-none mt-1 ml-25">
+                           <div class="row">
+                                <x-form.textbox name="company" parantClass="col-md-6" value="{{ $user->client->p_company_name ?? old('company') }}" errorName="company" placeholder="Company" alert="Company"/>
+                                <x-form.textbox name="tax_id" parantClass="col-md-6" value="{{ $user->client->p_tax_id ?? old('tax_id') }}" errorName="tax_id" placeholder="Tax Id" alert="Tax Id (Optional)"/>
+                           </div>
+                        </div> --}}
+
+                            <div class="row mt-3">
+                                <x-form.textbox name="phone_no" parantClass="col-md-6" value="{{ $user->phone_no ?? old('phone_no') }}" errorName="phone_no" placeholder="Phone" labelName="Phone" optionalText="Optional" />
+
+                                <div class="col-md-6">
+                                    <label for="" class="form-label">Avatar</label>
+                                    <div id="avatar">
+                                    </div>
+                                    <input type="hidden" name="avatar_old" value="{{ isset($user) ? $user->avatar : '' }}">
+                                    @error('avatar')
+                                        <span class="text-danger"><i class="far fa-times-circle fa-sm"></i> {{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <x-form.button btnTitle="Save Changes" id="save_btn" class="btn-primary text-light"
+                                parentClass="text-end mt-3"></x-form.button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col-md-7 mx-auto">
+                <div class="card px-4 shadow-none">
+                    <h4 class="card-title pt-3 mb-0 fw-bold text-dark">Recent login history</h4>
+                    <div class="card-body">
+                        <table class="table last-right">
+                            <tbody>
+                                @foreach ($logs as $log)
+                                    @php
+                                        $browserInfo = getBrowserInfo($log->user_agent);
+                                        // Convert the UNIX timestamp to a Carbon instance
+                                        $date = Carbon\Carbon::createFromTimestamp($log->last_activity);
+                                        // Format the date as a string
+                                        $readableDate = $date->toDateTimeString(); // Adjust format as needed
+                                    @endphp
+                                    <tr>
+                                        <td class="d-none d-sm-table-cell">
+                                            {{ $date->diffForHumans() }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                if ($browserInfo['browser_name'] == 'Firefox'){
+                                                    $icon_name = 'fab fa-firefox';
+                                                }elseif ($browserInfo['browser_name'] == 'Chrome'){
+                                                    $icon_name = 'fab fa-chrome';
+                                                }elseif ($browserInfo['browser_name'] == 'Safari'){
+                                                    $icon_name = 'fab fa-safari';
+                                                }elseif ($browserInfo['browser_name'] == 'Edge'){
+                                                    $icon_name = 'fab fa-edge';
+                                                }elseif ($browserInfo['browser_name'] == 'IE'){
+                                                    $icon_name = 'fab fa-internet-explorer';
+                                                }else{
+                                                    $icon_name = 'fas fa-globe';
+                                                }     
+                                            @endphp
+
+                                            <i type="button" class="{{ $icon_name }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $browserInfo['browser'] .' on '. $browserInfo['os'] }}"></i>
+                                        </td>
+                                        <td>
+                                            <div class="ip-address" title="45.249.103.100">
+                                                {{ $log->ip_address }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @php
+                                                if ($log->ip_address != '127.0.0.1' && $log->ip_address != '192.168.0.1') {
+                                                    $details = json_decode(file_get_contents("https://ipinfo.io/{$log->ip_address}/json"));
+                                                } else {
+                                                    $details = null;
+                                                }
+                                            @endphp
+                                            @if ($details != null)
+                                                {{ $details->country }}
+                                            @else
+                                                Local
+                                            @endif
+                                        </td>
+                                        <td>
+            
+                                        </td>
+                                        <td class="text-end">
+                                            @if ($log->user_agent == request()->server('HTTP_USER_AGENT'))
+                                                <span class="badge badge-secondary">Current Session</span>
+                                            @else
+                                                Last login {{ $date->diffForHumans() }}
+                                            @endif
+                                            
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="mt-3 text-end">
+                    <button id="signOutOtherDevices" class="btn btn-outline-danger">Sign out of other devices</button>
+                    {{-- <form method="POST" action="{{ route('signout.others') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Sign out of other devices</button>
+                    </form> --}}
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
+
+@push('scripts')
+    <script src="{{ asset('js/spartan-multi-image-picker-min.js') }}"></script>
+    <script>
+        let element = document.querySelector('input[name="purchasing_type"]:checked');
+        if (element) {
+            $('.company_box').removeClass('d-none')
+        }
+        $(document).on('click', 'input[name="purchasing_type"]', function() {
+            if (this.checked) {
+                $('.company_box').removeClass('d-none')
+            } else {
+                $('.company_box').addClass('d-none')
+            }
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#avatar').spartanMultiImagePicker({
+                fieldName: 'avatar',
+                maxCount: 1,
+                rowHeight: '140px',
+                groupClassName: 'col-md-12 com-sm-12 com-xs-12 mb-0 p-0',
+                maxFileSize: '',
+                dropFileLabel: 'Drop Here',
+                allowExt: 'png|jpg|jpeg',
+                onExtensionErr: function(index, file) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Only png, jpg and jpeg file format allowed!'
+                    });
+                },
+            });
+
+            @isset($user->avatar)
+                $('#avatar img.spartan_image_placeholder').css('display', 'none');
+                $('#avatar .spartan_remove_row').css('display', 'none');
+                $('#avatar .img_').css('display', 'block');
+                $('#avatar .img_').attr('src', '{{ asset($user->avatar) }}');
+            @endisset
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#signOutOtherDevices').on('click', function() {
+                // Send an AJAX request to a route that handles the logout
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("logout.other.devices") }}', // Replace with your route
+                    data: {
+                        _token: '{{ csrf_token() }}' // Pass CSRF token for Laravel
+                    },
+                    success: function(response) {
+                        flashMessage('success',response.message);
+                        location.reload();
+                    },
+                    error: function(xhr, status, error) {
+                        flashMessage('error','Error signing out of other devices.');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
+
+	

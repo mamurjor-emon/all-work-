@@ -1,0 +1,139 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+
+    .countdown {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+    }
+
+    .countdown>div {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 90px;
+        box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.25);
+        width: 110px;
+        height: 110px;
+        border-radius: 4px;
+        background: #282A3E;
+    }
+
+    .number {
+        font-weight: 500;
+        font-size: 50px;
+        color: #d8d8d8;
+    }
+
+    .count_text {
+        color: #b9b5b5;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    @media screen and (max-width:600px) {
+
+        .countdown {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .countdown>div {
+            background: #282A3E;
+            width: 250px;
+            height: 60px;
+            margin: 0;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .number {
+            font-size: 34px;
+        }
+    }
+</style>
+
+<section class="courses-area section-b-85-space section-t-space countDown-section {{ get_option('count_down_date') != null ? '' : 'd-none' }}">
+    <div class="container">
+        <div class="row">
+                @if (get_option('count_down_title') != null)
+                <div class="section-title">
+                    <h3 class="section-heading">{{  get_option('count_down_title')  }}</h3>
+                </div>
+                @endif
+                @if (get_option('count_down_sub_title') != null)
+                <div class="section-sub-heading">
+                    <p class=" text-center"> {{ get_option('count_down_sub_title')  }}</p>
+                </div>
+                @endif
+            <div class="main">
+                <div class="countdown">
+                    <div>
+                        <span class="number months"></span>
+                        <span class="count_text">Months</span>
+                    </div>
+                    <div>
+                        <span class="number days"></span>
+                        <span class="count_text">Days</span>
+                    </div>
+                    <div>
+                        <span class="number hours"></span>
+                        <span class="count_text">Hours</span>
+                    </div>
+                    <div>
+                        <span class="number minutes"></span>
+                        <span class="count_text">Minutes</span>
+                    </div>
+                    <div>
+                        <span class="number seconds"></span>
+                        <span class="count_text">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const newDate = new Date('<?php echo $convertedDate; ?>').getTime();
+    // const newDate = new Date('sep 12 23 23:59:59').getTime();
+    console.log(newDate);
+    const countdown = setInterval(() => {
+        const date = new Date().getTime()
+        const diff = newDate - date
+
+        const month = Math.floor((diff % (1000 * 60 * 60 * 24 * (365.25 / 12) * 365)) / (1000 * 60 * 60 * 24 * (
+            365.25 / 12)))
+        const days = Math.floor(diff % (1000 * 60 * 60 * 24 * (365.25 / 12)) / (1000 * 60 * 60 * 24))
+        const hours = Math.floor(diff % (1000 * 60 * 60 * 24) / (1000 * 60 * 60))
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+        document.querySelector(".seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds
+        document.querySelector(".minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes
+        document.querySelector(".hours").innerHTML = hours < 10 ? '0' + hours : hours
+        document.querySelector(".days").innerHTML = days < 10 ? '0' + days : days
+        document.querySelector(".months").innerHTML = month < 10 ? '0' + month : month
+    }, 1000)
+</script>
+
+
+<!-- form controller  -->
+if(get_option('count_down_date') != null){
+    $originalDate =  get_option('count_down_date');
+    $carbonDate = Carbon::createFromFormat('Y-m-d', $originalDate);
+    $convertedDate = $carbonDate->format('M d y');
+    $convertedDate .= ' 23:59:59';
+    $data['convertedDate'] = $convertedDate;
+}else{
+    $data['convertedDate'] = '';
+}
+
+// $ip = $request->ip();
+VisitorModel::firstOrCreate(['ip_address' => $request->ip()], [
+    'ip_address' => $request->ip(),
+]);
