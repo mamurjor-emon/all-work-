@@ -1,0 +1,11 @@
+<!-- Form Controller Code  -->
+$footerMenus = DynamicFooter::with('submenus')->where('parent_id', 0)->where('status', '1')->get();
+
+<!-- Form Model Code  -->
+public function submenus()
+{
+    return $this->hasMany(DynamicFooter::class, 'parent_id', 'id')
+        ->where('status', '1');
+}
+
+<!-- End  -->

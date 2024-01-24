@@ -1,0 +1,218 @@
+<!-- Go Tarminal  -->
+composer require yajra/laravel-datatables-oracle
+<!-- Go To Config/app.php  -->
+Yajra\DataTables\DataTablesServiceProvider::class,
+<!-- Go To Master File  -->
+<!-- Datatables CSS -->
+<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap4.min.css" rel="stylesheet">
+
+ <!--=================== Datatables Script ==================-->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+ <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+ <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+
+
+ <!-- Got Index File  -->
+ @extends('layouts.app')
+@section('title', $title)
+@section('add_button')
+    <div>
+        <a href="{{ route('admin.feautes.create') }}" class="create-btn btn btn-md mr-3 d-flex justify-content-between align-items-center text-white">
+            <i class="material-icons">add</i>
+            <span>Create</span>
+        </a>
+    </div>
+@endsection
+@section('content')
+    <div class="row mt-3">
+        <div class="col-md-12">
+        <div class="card px-3 py-3">
+            <div class="bg-white border-bottom-0 pb-4 d-flex justify-content-between align-items-center flex-row">
+                <h2 class="backend-title">{{ $title }}</h2>
+                <div class="email-template-search-bar btn-group d-flex align-items-center">
+                    <input type="text" id="datatable-search" class="h-100 border"
+                        placeholder="Title,Order By....">
+                    <button type="button"
+                        class="mdc-button mdc-button--raised filled-button--info mdc-ripple-upgraded"><i
+                            class="mdi mdi-magnify"></i></button>
+                </div>
+            </div>
+            <table id="feautes" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Sl</th>
+                        <th>Title</th>
+                        <th>Icon</th>
+                        <th>Status</th>
+                        <th class="text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
+@push('scripts')
+<script>
+    var tables  = $('#feautes').DataTable({
+        processing: true,
+        serverSide: true,
+        order: [], //Initial no order
+        bInfo: true, //TO show the total number of data
+        bFilter: false, //For datatable default search box show/hide
+        responsive: true,
+        ordering: false,
+        lengthMenu: [
+            [5, 10, 15, 25, 50, 100, 1000, 10000, -1],
+            [5, 10, 15, 25, 50, 100, 1000, 10000, "All"]
+        ],
+        pageLength: 25, //number of data show per page
+        ajax: {
+            url: "{{ route('admin.feautes.get.data') }}",
+            type: "POST",
+            dataType: "JSON",
+            data: function(d) {
+                d._token = _token,
+                d.search   = $('#datatable-search').val();
+            },
+        },
+        columns: [
+            {data: 'DT_RowIndex',orderable: false, searchable: false},
+            {data: 'title'},
+            {data: 'icon'},
+            {data: 'status'},
+            {data: 'action'},
+        ],
+        language: {
+            processing: '<img src="{{ asset('backend/assets/images/table-loading.svg') }}">',
+            emptyTable: '<strong class="text-danger">No Data Found</strong>',
+            infoEmpty: '',
+            zeroRecords: '<strong class="text-danger">No Data Found</strong>',
+            oPaginate: {
+                sPrevious: "Previous", // This is the link to the previous page
+                sNext: "Next", // This is the link to the next page
+            },
+            lengthMenu: "_MENU_"
+        },
+        dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6' <'float-right pr-15'B>>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'<'float-right pr-15'p>>>",
+        buttons: {
+            buttons: [{
+                    text: '<i class="fa fa-refresh" aria-hidden="true"></i> Reload',
+                    className: 'mdc-button mdc-button--raised filled-button--info mdc-ripple-upgraded mb-3',
+                    action: function(e, dt, node, config) {
+                        dt.ajax.reload(null, false);
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    title: 'Feautes',
+                    filename: 'feautes_{{ date('d-m-Y') }}',
+                    text: '<i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF',
+                    className: 'pdfButton mdc-button mdc-button--raised filled-button--info mdc-ripple-upgraded mb-3',
+                    orientation: "landscape",
+                    pageSize: "A4",
+                    exportOptions: {
+                        columns: '0,1,2,3,4'
+                    },
+                    customize: function(doc) {
+                        doc.defaultStyle.alignment = 'center';
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: 'Feautes',
+                    filename: 'feautes_{{ date('d-m-Y') }}',
+                    text: '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Excel',
+                    className: 'excelButton mdc-button mdc-button--raised filled-button--info mdc-ripple-upgraded mb-3',
+                    exportOptions: {
+                        columns: '0,1,2,3,4'
+                    },
+                },
+                {
+                    extend: 'print',
+                    text: '<i class="fa fa-print" aria-hidden="true"></i> Print',
+                    className: 'printButton mdc-button mdc-button--raised filled-button--info mdc-ripple-upgraded mb-3',
+                    orientation: "landscape",
+                    pageSize: "A4",
+                    exportOptions: {
+                        columns: '0,1,2,3,4'
+                    }
+                }
+            ]
+        }
+    });
+    $(document).on('keyup keyup','input#datatable-search',function(e){
+        tables.draw();
+    });
+</script>
+@endpush
+
+
+<!-- Go To Route File  -->
+Route::post('getdata', [CategoryController::class, 'getData'])->name('get.data');
+<!-- Go To Controlle  -->
+
+/**
+* Display a listing of the resource.
+*
+* @return \Illuminate\Http\Request $request
+* @return \Illuminate\Http\Response
+*/
+public function getData(Request $request)
+{
+   if (Gate::allows('isAdmin')) {
+       if ($request->ajax()) {
+           $getData = PortfolioSection::latest('id');
+           return DataTables::eloquent($getData)
+               ->addIndexColumn()
+               ->filter(function ($query) use ($request) {
+                   if (!empty($request->search)) {
+                       $query->when($request->search, function ($query, $value) {
+                           $query->where('btn_title', 'like', "%{$value}%")
+                               ->orWhere('order_by', 'like', "%{$value}%");
+                       });
+                   }
+               })
+               ->addColumn('image', function ($data) {
+                   return '<img id="getDataImage" src="' . asset($data->image) . '" alt="image">';;
+               })
+               ->addColumn('btn_title', function ($data) {
+                   return $data->btn_title;
+               })
+               ->addColumn('btn_url', function ($data) {
+                   return $data->btn_url;
+               })
+               ->addColumn('status', function ($data) {
+                   return status($data->status);
+               })
+               ->addColumn('action', function ($data) {
+                   return '<div class="text-right" ><a href="' . route('admin.portfolio.edit', ['id' => $data->id]) . '" class="rounded mdc-button mdc-button--raised icon-button filled-button--success">
+                   <i class="material-icons mdc-button__icon">colorize</i>
+                 </a> <button class="mdc-button mdc-button--raised icon-button filled-button--secondary" onclick="delete_data(' . $data->id . ')">
+                 <i class="material-icons mdc-button__icon">delete</i>
+               </button><form action="' . route('admin.portfolio.delete', ['id' => $data->id]) . '"
+               id="delete-form-' . $data->id . '" method="DELETE" class="d-none">
+               @csrf
+               @method("DELETE") </form></div>';
+               })
+               ->rawColumns(['image', 'status', 'action'])
+               ->make(true);
+       }
+   } else {
+       abort(401);
+   }
+}

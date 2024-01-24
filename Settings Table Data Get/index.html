@@ -1,0 +1,18 @@
+<!-- SettingsServiceProvider Code  -->
+/**
+* Bootstrap services.
+*
+* @return void
+*/
+public function boot()
+{
+   if (!App::runningInConsole() && count(Schema::getColumnListing('settings'))) {
+       $setting = Setting::get();
+       foreach ($setting as $value) {
+           Config::set('settings.' . $value->key, $value->value);
+       }
+   }
+}
+
+<!-- Show Data In Blade  -->
+{!! config('settings.custom_css') !!}

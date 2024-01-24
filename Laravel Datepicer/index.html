@@ -1,0 +1,78 @@
+<!-- Add This CSS Link  -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<!-- Add This JS Link  -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<!-- Add This Code Master File  -->
+<script>
+    // date range init
+    $('input#date_filter').daterangepicker({
+        opens: 'right',
+        autoUpdateInput: false,
+        locale: {
+            cancelLabel: 'Clear'
+        },
+        ranges: {
+            'Today': [moment(), moment()],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf(
+                'month')],
+        }
+    }, function (start, end, label) {
+        $('input[name="start_date"]').val(start.format('YYYY-MM-DD'));
+        $('input[name="end_date"]').val(end.format('YYYY-MM-DD'));
+    });
+
+    $('input#date_filter').on('apply.daterangepicker', function (ev, picker) {
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+    });
+
+    $('input#date_filter').on('cancel.daterangepicker', function (ev, picker) {
+        $(this).val('');
+    });
+</script>
+
+<!-- Add This Code In Filltering Controller  -->
+public function index(Request $request)
+{
+    if($request->all() == []){
+        $salesProducts = Sale::latest('id')->paginate(25);
+    }else{
+        if ($request->start_date) {
+            $today_date = $request->start_date;
+        } else {
+            $today_date = now()->format('Y-m-d');
+        }
+        if ($request->end_date) {
+            $last_date = $request->end_date;
+        } else {
+            $last_date = now()->format('Y-m-d');
+        }
+        $salesProducts = Sale::whereDate('created_at', '>=', $today_date)->whereDate('created_at', '<=', $last_date)->paginate(25);
+    }
+}
+
+<!-- Add This Code In Filter Page  -->
+<ul class="d-flex align-items-center unlisted mb-0">
+    <li class="nav-item">
+        <form action="{{ route('report.index') }}" method="GET" class="me-3 d-flex">
+            <input type="text" onchange="dateWiseFilter()"
+                class="form-control form-control-sm shadow-sm border-0" placeholder="MM/DD/YYYY"
+                id="date_filter">
+            <input type="hidden" name="start_date">
+            <input type="hidden" name="end_date">
+            <button type="submit" class="mx-3 btn btn-sm bg-success text-white shadow-sm">
+                Filter
+            </button>
+        </form>
+    </li>
+    <li>
+        <a href="{{ route('report.index') }}" class="btn btn-sm bg-danger text-white shadow-sm">
+            Reset
+        </a>
+    </li>
+</ul>
+
+<!-- End  -->
