@@ -1,0 +1,14 @@
+    <script>
+        // password input type text
+        $(document).on('click','.password-key',function(){
+            if($(this).children().hasClass('fa-eye-slash')){
+                $(this).children().removeClass('fa-eye-slash');
+                $(this).children().addClass('fa-eye');
+                $('input[name="password"]').attr('type','text');
+            }else{
+                $(this).children().removeClass('fa-eye');
+                $(this).children().addClass('fa-eye-slash');
+                $('input[name="password"]').attr('type','password');
+            }
+        });
+    </script>

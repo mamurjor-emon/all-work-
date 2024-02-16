@@ -1,0 +1,12 @@
+Past This Code In Provider
+
+public function boot(): void
+    {
+        if (!App::runningInConsole() && count(Schema::getColumnListing('settings'))) {
+            $settings = Setting::all()->pluck('option_value', 'option_key')->toArray();
+            $this->app->instance('settings', $settings);
+            foreach ($settings as $key => $value) {
+                Config::set('settings.' . $key, $value);
+            }
+        }
+}
