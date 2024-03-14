@@ -1,0 +1,19 @@
+<!-- instaill This package  -->
+npm install --save lottie-web
+<!-- Add Div Container  -->
+<div ref="lottieContainer"></div>
+<!-- Add Js Code  -->
+<script>
+    import lottie from 'lottie-web';
+    export default {
+      mounted() {
+        lottie.loadAnimation({
+          container: this.$refs.lottieContainer,
+          renderer: 'svg', 
+          loop: true,
+          autoplay: true,
+          path: 'https://assets10.lottiefiles.com/packages/lf20_yswivetl.json' 
+        });
+      }
+    }
+    </script>

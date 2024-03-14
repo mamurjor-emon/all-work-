@@ -1,0 +1,26 @@
+<!-- Install Package  -->
+npm install aos --save
+
+<!-- Uses This Code  -->
+<template>
+    <div>
+      <div data-aos="fade-up">Content 1</div>
+      <div data-aos="fade-up">Content 2</div>
+      <div data-aos="fade-up">Content 3</div>
+    </div>
+  </template>
+  
+  <script>
+  import AOS from 'aos';
+  import 'aos/dist/aos.css';
+  
+  export default {
+    mounted() {
+      AOS.init();
+    }
+  }
+  </script>
+  
+  <style>
+  </style>
+  
